@@ -1,4 +1,4 @@
 from .base import *
 
 DEBUG = False
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['*']
