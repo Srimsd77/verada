@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Waste Source Master Dashboard{% endblock %}
+{% block body_id %}dashboard{% endblock %}
+
+
+{% block content %}
+<div class="off-canvas-content" data-off-canvas-content>
+    {% include "includes/sidebar_router.html" with active_page="waste_source" %}
+    <div class="grid-x">
+        <div class="cell large-10 large-offset-2">
+            {% include 'partials/header_authenticated.html' with page_name="Waste Source Master Dashboard" %}
+            <div class="dashboard-content">
+
+                <!-- Dashboard Full Table Begin-->
+                <div class="table-container">
+                    <div class="grid-x">
+                        <div class="cell large-12">
+                            <div class="callout">
+                                <div class="dashboard-callout">
+                                    <div class="grid-x grid-margin-y small-up-1 medium-up-2">
+                                        <div class="cell">
+                                            <span class="sub-title"
+                                                style="background: url(/static/images/iconmonstr-chart-22.png) no-repeat 0px center">Waste
+                                                Generators</p>
+                                        </div>
+                                        <div class="cell">
+                                            <input type="search" id="waste-source-master-search" placeholder="Search" class="pill"
+                                                style="width: 50%; float: right; padding-left: 15px; padding-right: 15px; box-shadow: none;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table">
+                                    <table class="stack" id="waste-source-master-table">
+                                        <thead>
+                                            <tr>
+                                                <th width="30">
+                                                    <input type="checkbox" class="checkbox">
+                                                </th>
+                                                <th>ID</th>
+                                                <th>Waste Group Name</th>
+                                                <th>Waste Source Name</th>
+                                                <th>Location</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for waste_source_master in waste_source_masters %}
+                                            <tr>
+                                                <td><input type="checkbox" class="checkbox"></td>
+                                                <td><a href="./waste-generator-form.html" id="waste-gen-1">{{waste_source_master.id}}</a>
+                                                </td>
+                                                <td>{{waste_source_master.waste_source.name}}</td>
+                                                <td>{{waste_source_master.waste_group.name}}</td>
+                                                <td>{{waste_source_master.address|default:'-'}}</td>
+                                                <td>{{waste_source_master.get_status_display}}</td>
+                                            </tr>
+                                            {% empty %}
+                                            <tr>
+                                                <td colspan="12" class="text-center">No waste group available.</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/waste_group_source/waste_source_master_dashboard.js' %}"></script>
+{% endblock %}

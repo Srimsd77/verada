@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Add Waste Collector{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/fieldsLinker.css' %}">
+
+{% endblock %}
+
+{% block body_id %}dashboard{% endblock %}
+
+{% block content %}
+<div class="off-canvas-content" data-off-canvas-content>
+    {% include "side_bar.html" with active_page="client_commodity" %}
+    <div class="grid-x">
+        <div class="cell large-10 large-offset-2">
+            {% include 'partials/header_authenticated.html' with page_name='Client Commodity Dashboard' %}
+            <div class="dashboard-content">
+                <div class="grid-container">
+                    <div class="grid-x">
+                        <div class="cell large-7 grid-center">
+
+                            <div class="grid-x align-middle padding-3" style="margin-top: 3rem;">
+                                <!-- Available Countries -->
+                                <div class="cell medium-5 text-left">
+                                    <div class="callout">
+                                        <label for="country">Available Commodities
+                                            <select id="country" name="country" multiple class="select" style="width: 100%;min-height: 150px;">
+                                                <option>MEAT</option>
+                                                <option>BP</option>
+                                                <option>FRESH</option>
+                                                <option>MIX</option>
+                                                <option>DAIRY</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+        
+                                <!-- Arrows in a vertical stack -->
+                                <div class="cell medium-1 text-center">
+                                    <div class="flex-container flex-dir-column align-center-middle" style="height: 100%;">
+                                        <button id="moveright" class="button small secondary margin-bottom-1">&gt;</button>
+                                        <button id="moveleft" class="button small secondary">&lt;</button>
+                                    </div>
+                                </div>
+        
+                                <!-- Selected Countries -->
+                                <div class="cell medium-5 text-left">
+                                    <div class="callout">
+                                        <label for="planets">Selected Countries
+                                            <select id="planets" name="planets" multiple class="select" style="width: 100%;min-height: 150px;">
+                                                <option disabled selected>-- Selected Commodities --</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script>
+    $("#moveright").click(function () {
+        $("#country > option:selected").each(function () {
+            $(this).remove().appendTo("#planets");
+        });
+    });
+
+    $("#moveleft").click(function () {
+        $("#planets > option:selected").each(function () {
+            $(this).remove().appendTo("#country");
+        });
+    });
+
+</script>
+
+<!-- <script src="{% static 'js/commoditi_import_bulk.js' %}"></script> -->
+<!-- <script src="{% static 'js/collector_import_bulk.js' %}"></script> -->
+{% endblock %}

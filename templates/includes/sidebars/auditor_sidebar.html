@@ -1,0 +1,48 @@
+{% load static %}
+<div class="callout side-bar show-for-large">
+    <div class="side-nav">
+        <ul class="menu vertical">
+            <li class="logo-mark"><a href=""></a></li>
+            <li><a href="#" style="background: url(/static/images/iconmonstr-paper-plane-2.png) no-repeat center;"></a></li>
+            <li><a href="#" style="background: url(/static/images/iconmonstr-note-38.png) no-repeat center;"></a></li>
+            <li><a href="#" style="background: url(/static/images/iconmonstr-help-3.png) no-repeat center;"></a></li>
+        </ul>
+    </div>
+    <ul class="menu vertical">
+        <a href="{% url 'dashboard:dashboard' %}">
+            <li class="logo" style="background: url('{{ logo_url }}') no-repeat center;"></li>
+        </a>
+        {% if active_page == 'agreement_dashboard' %}
+			<li class="{% if request.path == '/agreements/dashboard/' %}selected{% endif %}">
+                <a href="{% url 'agreements:dashboard' %}">Agreement Dashboard</a>
+            </li>		
+            <li class="{% if request.path == '/agreements/form/' %}selected{% endif %}">
+                <a href="{% url 'agreements:form' %}" style="background: url() no-repeat 1px center">Add Agreement</a>
+            </li>
+        {% elif active_page == 'Dashboard' %}
+            <li class="selected">
+                <a href="#">{{ active_page }}</a>
+            </li>
+            <li>
+                <a href="{% url 'audits:dashboard' %}" style="background: url('{% static "icons/audit.png" %}') no-repeat 1px center">Manage Audit</a>
+            </li>
+        {% elif active_page == 'audit' %}
+            <li class="{% if request.path == '/audits/dashboard/' %}selected{% endif %}">
+                <a href="{% url 'audits:dashboard' %}" style="background: url() no-repeat 1px center">Dashboard</a>
+            </li>
+            <li class="{% if request.path == '/audits/audit/schedule/' %}selected{% endif %}">
+                <a href="{% url 'audits:audit_schedule_form' %}" style="background: url() no-repeat 1px center">Schedule Audit</a>
+            </li>
+            {% comment %} <li class="{% if request.path == '/audits/add/audit/' %}selected{% endif %}">
+                <a href="{% url 'audits:add_audit' %}" style="background: url() no-repeat 1px center">Audit</a>
+            </li> {% endcomment %}
+        {% endif %}
+
+     </ul>
+     <div class="notes" style="display:none">
+        <ul class="menu vertical">
+            <li><a href="#" style="background: url(/static/images/makefg.png) no-repeat 0px center">Updates</a></li>
+         </ul>
+         <small>Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</small>
+     </div>
+</div>
