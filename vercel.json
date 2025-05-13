@@ -9,7 +9,7 @@
       "src": "build.sh",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "/staticfiles"
+        "distDir": "staticfiles"
       }
     } 
   ],
@@ -22,7 +22,6 @@
       "src": "/(.*)",
       "dest": "VERADA/wsgi.py"
     }
-  ],
-  "outputDirectory": "/staticfiles"
+  ]
 }
   
