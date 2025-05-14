@@ -24,6 +24,7 @@ from drf_spectacular.views import (
 )
 from django.conf import settings
 from django.conf.urls.static import static
+from django.shortcuts import redirect
 
 
 urlpatterns = [
@@ -38,6 +39,8 @@ urlpatterns = [
 
     # Redoc UI (optional)
     path('api/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+
+    path('', lambda request: redirect('/dashboard')),
 
     path('', include('apps.users.api_urls')),
     path('', include('apps.common.urls')),
